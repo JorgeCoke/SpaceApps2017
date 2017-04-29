@@ -1,0 +1,17 @@
+{
+  "name": "SpaceApps2017",
+  "version": "0.0.1",
+  "description": "Space Apps 2017",
+  "engines": {
+    "node": "6.10.2"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "4.15.2",
+    "request": "^2.81.0"
+  }
+}
