@@ -1,4 +1,4 @@
-<div class="container">
+<div>
     <div
             isteven-multi-select
             input-model="layers"
@@ -6,7 +6,7 @@
             button-label="icon name"
             item-label="icon name maker"
             tick-property="ticked"
-            on-item-click="vm.checkLayers()"
+            on-item-click="vm.checkLayers(data)"
             on-select-all="vm.selectAllLayers()"
             on-select-none="vm.resetLayers()"
             on-reset="vm.resetLayers()"

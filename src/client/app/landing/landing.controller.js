@@ -10,7 +10,10 @@
     function LandingController($rootScope, $scope, $state) {
         var vm = this;
 
-        var earth = new WE.map('earth_div');
+        var earth = new WE.map('earth_div', {
+          sky: true,
+          atmosphere: true
+        });
 
         var natural = WE.tileLayer('http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg', {
             tileSize: 256,
@@ -144,15 +147,19 @@
             $state.reload();
         }
 
-        function checkLayers(){
-            console.log('Checking layers');
-            angular.forEach( $scope.outputLayers, function(value, key) {
+        function checkLayers(data){
+            console.log(data);
                 for(var i = 0; i < layersHash.length; i++){
-                    if(layersHash[i].name === value.name){
+                    if(layersHash[i].name === data.name && data.ticked){
+                      console.log("añado capa");
                         layersHash[i].layer.addTo(earth);
+                        layersHash[i].layer.setOpacity(1);
+                    }
+                    else if (layersHash[i].name === data.name && !data.ticked){
+                      console.log("elimino capa");
+                        layersHash[i].layer.setOpacity(0);
                     }
                 }
-            });
         }
 
     }
