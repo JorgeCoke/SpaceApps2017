@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Space Apps 2017",
   "authors": [],
-  "license": "UNDEFINED",
+  "license": "uNEDFI",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -33,7 +33,8 @@
     "proj4": "^2.4.3",
     "leaflet": "^1.0.3",
     "Proj4Leaflet": "proj4leaflet#^1.0.1",
-    "isteven-angular-multiselect": "^4.0.0"
+    "isteven-angular-multiselect": "^4.0.0",
+    "angular-material": "^1.1.4"
   },
   "resolutions": {
     "angular": "~1.6.3",

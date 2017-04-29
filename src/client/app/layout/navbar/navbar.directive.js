@@ -17,18 +17,12 @@
             templateUrl: 'app/layout/navbar/navbar.html'
         };
 
-        NavbarController.$inject = ['$rootScope', '$scope', 'ChangeLayersService'];
+        NavbarController.$inject = ['$rootScope', '$scope'];
 
-        function NavbarController($rootScope, $scope, ChangeLayersService) {
+        function NavbarController($rootScope, $scope) {
             //console.log("Navbar controller called!");
             var vm = this;
             $scope.isCollapsed = true;
-
-            vm.showLayers = showLayers;
-
-            function showLayers(){
-                ChangeLayersService.open();
-            }
         }
 
         return directive;

@@ -9,7 +9,6 @@
             'ngAnimate',
             'angular-loading-bar',
             'app.landing',
-            'app.layers',
             'app.layout'
         ])
         .config(function ($stateProvider, $urlRouterProvider, $logProvider, $locationProvider) {

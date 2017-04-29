@@ -1,23 +1,32 @@
 <style media="screen">
-.center {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-}
+    .center {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }
 </style>
 <div>
-    <div class="center"
-            isteven-multi-select
-            input-model="layers"
-            output-model="outputLayers"
-            button-label="icon name"
-            item-label="icon name maker"
-            tick-property="ticked"
-            on-item-click="vm.checkLayers(data)"
-            on-select-all="vm.selectAllLayers()"
-            on-select-none="vm.resetLayers()"
-            on-reset="vm.resetLayers()"
-    >
+    <div class="center">
+        <md-datepicker name="fechaCaducidad" ng-model="vm.date"
+                       md-placeholder="Select a date to visualize data"
+                       required md-open-on-focus>
+        </md-datepicker>
+        <br>
+        <br>
+        <div
+             isteven-multi-select
+             input-model="layers"
+             output-model="outputLayers"
+             button-label="icon name"
+             item-label="icon name maker"
+             tick-property="ticked"
+             on-item-click="vm.checkLayers(data)"
+             on-select-all="vm.selectAllLayers()"
+             on-select-none="vm.resetLayers()"
+             on-reset="vm.resetLayers()"
+        >
+        </div>
     </div>
+    <br>
     <div id="earth_div"></div>
 </div>
