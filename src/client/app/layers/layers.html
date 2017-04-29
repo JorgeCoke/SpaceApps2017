@@ -1,0 +1,30 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-hidden="true" data-dismiss="modal" ng-click="vm.cancel()">&times;</button>
+    <h4 class="modal-title" >Select layers</h4>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="alert alert-danger" ng-show="vm.addError">
+                <a href="#" class="close" aria-label="close" ng-click="vm.toggleLogin()">&times;</a>
+                <strong>Error when logging in:</strong> please check your credentials and try again.
+            </div>
+            <div class="alert alert-danger" ng-show="vm.addAlternativeError">
+                <a href="#" class="close" aria-label="close" ng-click="vm.toggleLogin()">&times;</a>
+                <strong>Error registring with an account:</strong> please use an account with different email.
+            </div>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+            <div
+                    isteven-multi-select
+                    input-model="availableLayers"
+                    output-model="outputLayers"
+                    button-label="icon name"
+                    item-label="icon name maker"
+                    tick-property="ticked"
+            >
+            </div>
+            <button type="submit" class="form-control btn btn-primary" ng-click="vm.update()">Save changes</button>
+        </div>
+    </div>
+</div>

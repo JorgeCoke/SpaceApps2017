@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <style>
+        .ng-hide {
+            display: none !important;
+        }
+    </style>
+    <title ng-bind="title">
+        Twitter Manager
+    </title>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <base href="/">
+
+    <!-- CSS del sistema obtenidos de bower -->
+    <!-- build:css styles/lib.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="/bower_components/angular-loading-bar/build/loading-bar.css" />
+    <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
+    <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/bower_components/isteven-angular-multiselect/isteven-multi-select.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/app.css -->
+    <!-- inject:css -->
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+
+<body>
+<div>
+    <!-- Inyeccion del layout base de la aplicacion con navbar y contenido -->
+    <div ng-include="'app/layout/layout.html'"></div>
+</div>
+<br>
+
+
+<!-- build:js js/lib.js -->
+<!-- bower:js -->
+<script src="/bower_components/jquery/dist/jquery.js"></script>
+<script src="/bower_components/angular/angular.js"></script>
+<script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="/bower_components/angular-resource/angular-resource.js"></script>
+<script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+<script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="/bower_components/extras.angular.plus/ngplus-overlay.js"></script>
+<script src="/bower_components/angular-animate/angular-animate.js"></script>
+<script src="/bower_components/angular-loading-bar/build/loading-bar.js"></script>
+<script src="/bower_components/moment/moment.js"></script>
+<script src="/bower_components/toastr/toastr.js"></script>
+<script src="/bower_components/proj4/dist/proj4.js"></script>
+<script src="/bower_components/leaflet/dist/leaflet-src.js"></script>
+<script src="/bower_components/Proj4Leaflet/src/proj4leaflet.js"></script>
+<script src="/bower_components/isteven-angular-multiselect/isteven-multi-select.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- Importacion automatica de modulos individuales y sus ficheros -->
+<!-- build:js js/app.js -->
+<!-- inject:js -->
+<script src="/src/client/app/app.module.js"></script>
+<script src="/src/client/app/landing/landing.module.js"></script>
+<script src="/src/client/app/layers/layers.module.js"></script>
+<script src="/src/client/app/layout/layout.module.js"></script>
+<script src="/src/client/app/layout/navbar/navbar.module.js"></script>
+<script src="/src/client/app/landing/landing.controller.js"></script>
+<script src="/src/client/app/layers/layers.controller.js"></script>
+<script src="/src/client/app/layers/layers.service.js"></script>
+<script src="/src/client/app/layout/alert.service.js"></script>
+<script src="/src/client/app/layout/layout.controller.js"></script>
+<script src="/src/client/app/layout/navbar/navbar.directive.js"></script>
+<!-- endinject -->
+
+<script src="http://www.webglearth.com/v2/api.js"></script>
+
+<!-- inject:templates:js -->
+<!-- endinject -->
+
+</body>
+
+</html>

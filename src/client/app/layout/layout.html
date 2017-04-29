@@ -1,0 +1,38 @@
+<div ng-controller="LayoutController as vm">
+    <header class="clearfix">
+        <navbar navline="vm.navline"></navbar>
+    </header>
+
+    <section id="content" class="content">
+        <div class="container">
+            <div class="row">
+                <style>
+                    .alert-fade.ng-enter {
+                        transition: 0.5s linear all;
+                        opacity: 0;
+                    }
+                    .alert-fade.ng-enter.ng-enter-active {
+                        opacity: 1;
+                    }
+                    .alert-fade.ng-leave {
+                        transition: 0.5s linear all;
+                        opacity: 1;
+                    }
+                    .alert-fade.ng-leave.ng-leave-active {
+                        opacity: 0;
+                    }
+                </style>
+                <div uib-alert ng-repeat="alert in permanentAlerts"
+                     ng-class="'alert-' + (alert.type || 'warning') + ' alert-fade'" close="alert.close()">
+                    {{alert.msg}}
+                </div>
+                <div uib-alert dismiss-on-timeout="5000" ng-repeat="alert in alerts"
+                     ng-class="'alert-' + (alert.type || 'warning') + ' alert-fade'" close="alert.close()">
+                    {{alert.msg}}
+                </div>
+                <ui-view>
+                </ui-view>
+            </div>
+        </div>
+    </section>
+</div>
