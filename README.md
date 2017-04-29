@@ -16,3 +16,5 @@ SpaceApps2017
 - npm start
 
 - Server should be running on: http://localhost:5000
+
+get texture -> http://localhost:5000/texture/earth.jpg
