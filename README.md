@@ -8,3 +8,11 @@ SpaceApps2017
 - Modelos 3D: https://nasa3d.arc.nasa.gov/models , https://www.nasa.gov/multimedia/3d_resources/3d-models-gallery-collection_archive_1.html
 
 - Nasa GIBS: https://earthdata.nasa.gov/about/science-system-description/eosdis-components/global-imagery-browse-services-gibs
+
+# Run local
+
+- npm install
+
+- npm start
+
+- Server should be running on: http://localhost:5000
