@@ -27,7 +27,7 @@
         });
         //toner.addTo(earth);
 
-
+        var openStreetMap = WE.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {});
 
         var NASAGIBS_ViirsEarthAtNight2012 = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/VIIRS_CityLights_2012/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}', {
             attribution: 'Imagery provided by services from the Global Imagery Browse Services (GIBS), operated by the NASA/GSFC/Earth Science Data and Information System (<a href="https://earthdata.nasa.gov">ESDIS</a>) with funding provided by NASA/HQ.',
@@ -95,37 +95,25 @@
             ]
         });
 
-        // var template =
-        //     "//map1{s}.vis.earthdata.nasa.gov/wmts-geo/" +
-        //     "{layer}/default/{time}/{tileMatrixSet}/{z}/{y}/{x}.png";
-        //
-        // var layer = WE.tileLayer(template, {
-        //     layer: "VIIRS_SNPP_DayNightBand_ENCC",
-        //     tileMatrixSet: "EPSG4326_500m",
-        //     time: "2016-12-04",
-        //     tileSize: 512,
-        //     subdomains: "abc",
-        //     noWrap: true,
-        //     continuousWorld: true,
-        //     // Prevent Leaflet from retrieving non-existent tiles on the
-        //     // borders.
-        //     bounds: [
-        //         [-89.9999, -179.9999],
-        //         [89.9999, 179.9999]
-        //     ]
-        // });
-
         $scope.layers = [
-            {name: 'NASAGIBS_ViirsEarthAtNight2012', ticked: false},
-            {name: 'NASAGIBS_ModisTerraLSTDay', ticked: false},
-            {name: 'NASAGIBS_ModisTerraSnowCover', ticked: false},
-            {name: 'NASAGIBS_ModisTerraChlorophyll', ticked: false},
-            {name: 'MODIS_Aqua_CorrectedReflectance_Bands721', ticked: false}
+          {name: 'natural', ticked: false, opacity: 0.8},
+          {name: 'toner', ticked: false, opacity: 0.2},
+          {name: 'Open Street Map', ticked: false, opacity: 0.9},
+
+            {name: 'NASAGIBS_ViirsEarthAtNight2012', ticked: false, opacity: 0.6},
+            {name: 'NASAGIBS_ModisTerraLSTDay', ticked: false, opacity: 0.4},
+            {name: 'NASAGIBS_ModisTerraSnowCover', ticked: false, opacity: 0.4},
+            {name: 'NASAGIBS_ModisTerraChlorophyll', ticked: false, opacity: 0.4},
+            {name: 'MODIS_Aqua_CorrectedReflectance_Bands721', ticked: false, opacity: 0.4}
 
         ];
         $scope.outputLayers = [];
 
         var layersHash = [
+          {layer: natural, name: 'natural'},
+          {layer: toner, name: 'toner'},
+          {layer: openStreetMap, name: 'Open Street Map'},
+
             {layer: NASAGIBS_ViirsEarthAtNight2012, name: 'NASAGIBS_ViirsEarthAtNight2012'},
             {layer: NASAGIBS_ModisTerraLSTDay, name: 'NASAGIBS_ModisTerraLSTDay'},
             {layer: NASAGIBS_ModisTerraSnowCover, name: 'NASAGIBS_ModisTerraSnowCover'},
@@ -151,9 +139,10 @@
             console.log(data);
                 for(var i = 0; i < layersHash.length; i++){
                     if(layersHash[i].name === data.name && data.ticked){
-                      console.log("añado capa");
+                      console.log("añado capa", layersHash[i]);
+                      console.log(data);
                         layersHash[i].layer.addTo(earth);
-                        layersHash[i].layer.setOpacity(1);
+                        layersHash[i].layer.setOpacity(data.opacity);
                     }
                     else if (layersHash[i].name === data.name && !data.ticked){
                       console.log("elimino capa");
