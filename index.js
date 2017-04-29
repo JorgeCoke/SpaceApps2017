@@ -8,11 +8,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(__dirname + '/public'));
 
-app.use('/texture', express.static(__dirname + '/public/textures'));
-
 //Routers
+app.get('/menu', function(request, res) {
+  res.sendFile(__dirname + '/public/index_menu.html');
+});
 app.get('/', function(request, response) {
-  response.sendFile('public/index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 //Init
