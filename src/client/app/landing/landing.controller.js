@@ -9,6 +9,7 @@
 
     function LandingController($rootScope, $scope, $state, $timeout) {
         var vm = this;
+        vm.title='3D Nasa';
 
         LeapManager.init({
             maxCursors: 1,
@@ -29,11 +30,9 @@
 
 
         $scope.layers = [
-            // {name: 'natural', ticked: false, opacity: 0.8},
-            // {name: 'toner', ticked: false, opacity: 0.2},
 
             //{name: 'VIIRS_CityLights_2012', ticked: false, opacity: 0.6, format: 'jpg', maxZoom: 8},
-            {name: 'MODIS_Terra_Land_Surface_Temp_Day', ticked: false, opacity: 0.4, format: 'png', maxZoom: 7},
+            {name: 'MODIS_Terra_Land_Surface_Temp_Day', ticked: false, opacity: 0.7, format: 'png', maxZoom: 7},
             {name: 'MODIS_Terra_Snow_Cover', ticked: false, opacity: 0.4, format: 'png', maxZoom: 8},
             {name: 'MODIS_Aqua_CorrectedReflectance_Bands721', ticked: false, opacity: 0.4, format: 'jpg', maxZoom: 9},
             {name: 'MODIS_Aqua_SurfaceReflectance_Bands121', ticked: false, opacity: 0.8, format: 'jpg', maxZoom: 9},
@@ -70,16 +69,12 @@
             {name: 'MODIS_Aqua_CorrectedReflectance_Bands721', ticked: false, opacity: 0.8, format: 'jpg', maxZoom: 9},
             {name: 'Coastlines', ticked: false, opacity: 0.8, format: 'png', maxZoom: 9},
             {name: 'Reference_Features', ticked: false, opacity: 0.8, format: 'png', maxZoom: 9},
-            {name: 'BlueMarble_ShadedRelief', ticked: false, opacity: 0.8, format: 'jpg', maxZoom: 8},
             {name: 'BlueMarble_NextGeneration', ticked: false, opacity: 0.8, format: 'jpg', maxZoom: 8}
 
         ];
         $scope.outputLayers = [];
 
         var layersHash = [
-            // {layer: natural, name: 'natural'},
-            // {layer: toner, name: 'toner'},
-            //{layer: openStreetMap, name: 'Open Street Map'},
 
             {layer: null, name: 'MODIS_Terra_Land_Surface_Temp_Day'},
             {layer: null, name: 'MODIS_Terra_Snow_Cover'},
@@ -94,7 +89,6 @@
             {layer: null, name: 'MODIS_Aqua_CorrectedReflectance_Bands721'},
             {layer: null, name: 'Coastlines'},
             {layer: null, name: 'Reference_Features'},
-            {layer: null, name: 'BlueMarble_ShadedRelief'},
             {layer: null, name: 'BlueMarble_NextGeneration'}
         ];
 
@@ -121,8 +115,6 @@
         }
 
         function backDate() {
-            console.log('Actualizando fecha');
-
             var newDate = new Date(vm.date);
             newDate.setMonth(vm.date.getMonth() - 1);
             vm.date = newDate;
@@ -136,7 +128,7 @@
                 if (layer.ticked) {
                     var activeLayer = layersHash[j].layer;
                     activeLayer.removeFrom(earth);
-                    console.log('Cambiando patras');
+                    console.log('Cambiando capa');
                     checkLayers($scope.layers[j]);
                     // console.log(activeLayer);
                     // console.log(activeLayer.C._imageryProvider._url);
@@ -158,6 +150,7 @@
         // }, 5000);
 
         function selectAllLayers() {
+
         }
 
         function resetLayers() {
@@ -182,7 +175,7 @@
                         tilematrixset: 'GoogleMapsCompatible_Level',
                         opacity: data.opacity
                     });
-                    console.log(aux);
+                    //console.log(aux);
                     layersHash[i].layer = aux;
                     aux.addTo(earth);
                     // layersHash[i].layer.addTo(earth);
@@ -208,7 +201,7 @@
                     if (hand.type == "left" && !detectadoCambioFecha && hand.grabStrength == 1) {
                         detectadoCambioFecha = true;
 
-                        console.log('Iendo pa traaaaaaaaaaaaa');
+                        //console.log('Iendo pa traaaaaaaaaaaaa');
                         $timeout(function () {
                             detectadoCambioFecha = false;
                             backDate();
