@@ -36,7 +36,7 @@
     <!-- endbuild -->
 </head>
 
-<body>
+<body class="leap-interactive" leap-disable-tap="true" leap-disable-hover="true">
 <div>
     <!-- Inyeccion del layout base de la aplicacion con navbar y contenido -->
     <div ng-include="'app/layout/layout.html'"></div>
@@ -65,6 +65,7 @@
 <script src="/bower_components/angular-aria/angular-aria.js"></script>
 <script src="/bower_components/angular-messages/angular-messages.js"></script>
 <script src="/bower_components/angular-material/angular-material.js"></script>
+<script src="/bower_components/leapjs/leap-0.6.4.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -87,9 +88,11 @@
 <script src="GIBSLayer.js"></script>
 <script src="GIBSMetadata.js"></script>
 
+<script src="//js.leapmotion.com/leap-0.6.3.js"></script>
+<script src="//js.leapmotion.com/leap-plugins-0.1.8.js"></script>
+
 <!-- inject:templates:js -->
 <!-- endinject -->
-
 </body>
 
 </html>

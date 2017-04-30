@@ -34,7 +34,8 @@
     "leaflet": "^1.0.3",
     "Proj4Leaflet": "proj4leaflet#^1.0.1",
     "isteven-angular-multiselect": "^4.0.0",
-    "angular-material": "^1.1.4"
+    "angular-material": "^1.1.4",
+    "leapjs": "^0.6.4"
   },
   "resolutions": {
     "angular": "~1.6.3",

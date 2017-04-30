@@ -196,5 +196,14 @@
             }
         }
 
+        Leap.loop(function(frame) {
+          frame.hands.forEach(function(hand, index) {
+            if (hand.screenPosition()[0] < 300){
+              var c = earth.getPosition();
+              earth.setCenter([c[0], c[1] + 0.4]);
+            }
+          });
+        }).use('screenPosition', {scale: 0.25});
+
     }
 })();
