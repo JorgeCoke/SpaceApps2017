@@ -7,7 +7,6 @@
             'ngSanitize',
             'ui.router',
             'ngAnimate',
-            'angular-loading-bar',
             'app.landing',
             'app.layout'
         ])
