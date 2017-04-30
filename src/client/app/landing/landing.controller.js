@@ -5,13 +5,13 @@
         .module('app.landing')
         .controller('LandingController', LandingController);
 
-    LandingController.inject = ['$rootScope', '$scope', '$state'];
+    LandingController.inject = ['$rootScope', '$scope', '$state', '$timeout'];
 
-    function LandingController($rootScope, $scope, $state) {
+    function LandingController($rootScope, $scope, $state, $timeout) {
         var vm = this;
 
         LeapManager.init({
-            maxCursors:1,
+            maxCursors: 1,
             enableMetaGestures: false,
             enableDefaultMetaGestureActions: false,
             enableHoverTap: true,
@@ -32,22 +32,46 @@
             // {name: 'natural', ticked: false, opacity: 0.8},
             // {name: 'toner', ticked: false, opacity: 0.2},
 
-            {name: 'VIIRS_CityLights_2012', ticked: false, opacity: 0.6, format: 'jpg', maxZoom: 8},
+            //{name: 'VIIRS_CityLights_2012', ticked: false, opacity: 0.6, format: 'jpg', maxZoom: 8},
             {name: 'MODIS_Terra_Land_Surface_Temp_Day', ticked: false, opacity: 0.4, format: 'png', maxZoom: 7},
             {name: 'MODIS_Terra_Snow_Cover', ticked: false, opacity: 0.4, format: 'png', maxZoom: 8},
             {name: 'MODIS_Aqua_CorrectedReflectance_Bands721', ticked: false, opacity: 0.4, format: 'jpg', maxZoom: 9},
-            {name: 'MODIS_Aqua_SurfaceReflectance_Bands121', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
-            {name: 'VIIRS_SNPP_CorrectedReflectance_BandsM11-I2-I1', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
-            {name: 'MODIS_Terra_CorrectedReflectance_TrueColor', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
-            {name: 'MODIS_Terra_SurfaceReflectance_Bands121', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
-            {name: 'VIIRS_SNPP_CorrectedReflectance_BandsM3-I3-M11', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
-            {name: 'VIIRS_SNPP_CorrectedReflectance_TrueColor', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
-            {name: 'VIIRS_SNPP_CorrectedReflectance_BandsM11-I2-I1', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
-            {name: 'MODIS_Aqua_CorrectedReflectance_Bands721', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
-            {name: 'Coastlines', ticked: false, opacity:0.8, format: 'png', maxZoom: 9},
-            {name: 'Reference_Features', ticked: false, opacity:0.8, format: 'png', maxZoom: 9},
-            {name: 'BlueMarble_ShadedRelief', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 8},
-            {name: 'BlueMarble_NextGeneration', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 8}
+            {name: 'MODIS_Aqua_SurfaceReflectance_Bands121', ticked: false, opacity: 0.8, format: 'jpg', maxZoom: 9},
+            {
+                name: 'VIIRS_SNPP_CorrectedReflectance_BandsM11-I2-I1',
+                ticked: false,
+                opacity: 0.8,
+                format: 'jpg',
+                maxZoom: 9
+            },
+            {
+                name: 'MODIS_Terra_CorrectedReflectance_TrueColor',
+                ticked: false,
+                opacity: 0.8,
+                format: 'jpg',
+                maxZoom: 9
+            },
+            {name: 'MODIS_Terra_SurfaceReflectance_Bands121', ticked: false, opacity: 0.8, format: 'jpg', maxZoom: 9},
+            {
+                name: 'VIIRS_SNPP_CorrectedReflectance_BandsM3-I3-M11',
+                ticked: false,
+                opacity: 0.8,
+                format: 'jpg',
+                maxZoom: 9
+            },
+            {name: 'VIIRS_SNPP_CorrectedReflectance_TrueColor', ticked: false, opacity: 0.8, format: 'jpg', maxZoom: 9},
+            {
+                name: 'VIIRS_SNPP_CorrectedReflectance_BandsM11-I2-I1',
+                ticked: false,
+                opacity: 0.8,
+                format: 'jpg',
+                maxZoom: 9
+            },
+            {name: 'MODIS_Aqua_CorrectedReflectance_Bands721', ticked: false, opacity: 0.8, format: 'jpg', maxZoom: 9},
+            {name: 'Coastlines', ticked: false, opacity: 0.8, format: 'png', maxZoom: 9},
+            {name: 'Reference_Features', ticked: false, opacity: 0.8, format: 'png', maxZoom: 9},
+            {name: 'BlueMarble_ShadedRelief', ticked: false, opacity: 0.8, format: 'jpg', maxZoom: 8},
+            {name: 'BlueMarble_NextGeneration', ticked: false, opacity: 0.8, format: 'jpg', maxZoom: 8}
 
         ];
         $scope.outputLayers = [];
@@ -55,7 +79,7 @@
         var layersHash = [
             // {layer: natural, name: 'natural'},
             // {layer: toner, name: 'toner'},
-            {layer: openStreetMap, name: 'Open Street Map'},
+            //{layer: openStreetMap, name: 'Open Street Map'},
 
             {layer: null, name: 'MODIS_Terra_Land_Surface_Temp_Day'},
             {layer: null, name: 'MODIS_Terra_Snow_Cover'},
@@ -77,15 +101,54 @@
         vm.checkLayers = checkLayers;
         vm.selectAllLayers = selectAllLayers;
         vm.resetLayers = resetLayers;
+        vm.backDate = backDate;
 
+        var aux;
         vm.date = new Date();
         vm.capas = [];
 
-        function parseDate(date){
+        function parseDate(date) {
             return date.getFullYear() + '-' +
-                ('0' + (date.getMonth()+1)).slice(-2) + '-' +
+                ('0' + (date.getMonth() + 1)).slice(-2) + '-' +
                 ('0' + date.getDate()).slice(-2);
         }
+
+        function backDate() {
+            console.log('Actualizando fecha');
+
+            var newDate = new Date(vm.date);
+            newDate.setMonth(vm.date.getMonth() - 1);
+            vm.date = newDate;
+
+            //vm.date.setMonth(vm.date.getMonth() + 1);
+
+            console.log(vm.date);
+            for (var j = 0; j < $scope.layers.length; j++) {
+                var layer = $scope.layers[j];
+
+                if (layer.ticked) {
+                    var activeLayer = layersHash[j].layer;
+                    activeLayer.removeFrom(earth);
+                    console.log('Cambiando patras');
+                    checkLayers($scope.layers[j]);
+                    // console.log(activeLayer);
+                    // console.log(activeLayer.C._imageryProvider._url);
+                    // var data = activeLayer.C._imageryProvider._url.split('/');
+                    // console.log(data[6]);
+                    // data[6]= parseDate(vm.date);
+                    // var newDataTogether = data.join();
+                    // activeLayer.C._imageryProvider._url = newDataTogether.replace(/,/g,'/');
+                }
+            }
+
+        }
+
+
+        // $timeout(function () {
+        //     $scope.layers[1] = {name: 'MODIS_Terra_Snow_Cover', ticked: true, opacity: 0.4, format: 'png', maxZoom: 8};
+        //     checkLayers($scope.layers[1]);
+        //
+        // }, 5000);
 
         function selectAllLayers() {
         }
@@ -102,7 +165,7 @@
                     // console.log(data);
                     // console.log("añado capa");
                     // console.log(layersHash[i].layer);
-                    var aux = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + data.name + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
+                    aux = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + data.name + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
                         bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
                         minZoom: 1,
                         maxZoom: 5,
@@ -112,10 +175,12 @@
                         tilematrixset: 'GoogleMapsCompatible_Level',
                         opacity: data.opacity
                     });
+                    console.log(aux);
                     layersHash[i].layer = aux;
                     aux.addTo(earth);
                     // layersHash[i].layer.addTo(earth);
                     // layersHash[i].layer.setOpacity(data.opacity);
+
                 }
                 else if (layersHash[i].name === data.name && !data.ticked) {
                     // console.log("elimino capa");
@@ -129,83 +194,91 @@
         var night;
         var detectadoCambioFecha = false;
 
-        Leap.loop({background: true},function(frame) {
-                  frame.hands.forEach(function(hand, index) {
+        Leap.loop({background: true}, function (frame) {
+            frame.hands.forEach(function (hand, index) {
 
-                    if (hand.type == "left" && !detectadoCambioFecha && hand.grabStrength == 1){
-                      detectadoCambioFecha = true;
-                      alert("Fecha cambiada"); detectadoCambioFecha = false;
-                      setTimeout(function(){ alert("Fecha cambiada"); detectadoCambioFecha = false;}, 3000);
+                if (hand.type == "left") {
+                    if (hand.type == "left" && !detectadoCambioFecha && hand.grabStrength == 1) {
+                        detectadoCambioFecha = true;
+
+                        console.log('Iendo pa traaaaaaaaaaaaa');
+                        $timeout(function () {
+                            detectadoCambioFecha = false;
+                            backDate();
+                        }, 1000);
                     }
-                    else {
-                      //console.log(hand);
-                      if (Math.abs(hand.roll()) > 2.6 && !NightIsOn){
+                }
+                else
+                {
+                    //console.log(hand);
+                    if (Math.abs(hand.roll()) > 2.6 && !NightIsOn) {
                         NightIsOn = true;
-                        if (firstTime){
-                          night = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + 'VIIRS_CityLights_2012' + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
-                              bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
-                              minZoom: 1,
-                              maxZoom: 5,
-                              level: 8,
-                              format: 'jpg',
-                              time: parseDate(vm.date),
-                              tilematrixset: 'GoogleMapsCompatible_Level',
-                              opacity: 0.6
-                          });
-                          night.addTo(earth);
-                          firstTime = false;
+                        if (firstTime) {
+                            night = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + 'VIIRS_CityLights_2012' + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
+                                bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
+                                minZoom: 1,
+                                maxZoom: 5,
+                                level: 8,
+                                format: 'jpg',
+                                time: parseDate(vm.date),
+                                tilematrixset: 'GoogleMapsCompatible_Level',
+                                opacity: 0.6
+                            });
+                            night.addTo(earth);
+                            firstTime = false;
                         }
                         //layersHash[i].layer = aux;
                         if (night)
-                        night.setOpacity(0.6);
-                      }
-                      else if (NightIsOn && Math.abs(hand.roll()) < 2.6) {
-                          NightIsOn = false;
-                          if (night)
-                          night.setOpacity(0);
-                      }
-
-                      //console.log(hand.screenPosition());
-                      console.log(earth.getZoom());
-                      var escalaBig;
-                      if (earth.getZoom() < 5){
-                        escalaBig = (Math.abs(0.65-earth.getZoom())/10)*2;
-                      }
-                      else if (earth.getZoom() < 7){
-                        escalaBig = (Math.abs(0.65-earth.getZoom())/10);
-                      } else if (earth.getZoom() < 10 && earth.getZoom() > 7) {
-                        escalaBig = (Math.abs(0.65-earth.getZoom())/15)/10;
-                      } else{
-                        escalaBig = Math.abs((0.625-earth.getZoom()/25))/100;
-                      }
-                      //console.log(Math.abs(hand.roll()));
-
-                      var c = earth.getPosition();
-                      if (hand.screenPosition()[0] < 300){
-                        c[1] = c[1] - escalaBig;
-                      }
-                      else if (hand.screenPosition()[0] > 500){
-                        c[1] = c[1] + escalaBig;
-                      }
-                      if (hand.screenPosition()[1] < 300){
-                        c[0] = c[0] + escalaBig;
-                      }
-                      else if (hand.screenPosition()[1] > 500){
-                        c[0] = c[0] - escalaBig;
-                      }
-                      earth.setCenter([c[0], c[1]]);
-                      if (hand.screenPosition()[2] < -150){
-                        earth.setZoom(earth.getZoom()+0.05);
-                      }
-                      else if (hand.screenPosition()[2] > 200){
-                        earth.setZoom(earth.getZoom()-0.05);
-                      }
+                            night.setOpacity(0.6);
                     }
-                  });
-                }).use('screenPosition', {scale: 0.25}).use('boneHand', {
-              targetEl: document.body,
-              arm: false
-                });
+                    else if (NightIsOn && Math.abs(hand.roll()) < 2.6) {
+                        NightIsOn = false;
+                        if (night)
+                            night.setOpacity(0);
+                    }
+
+                    //console.log(hand.screenPosition());
+                    console.log(earth.getZoom());
+                    var escalaBig;
+                    if (earth.getZoom() < 5) {
+                        escalaBig = (Math.abs(0.65 - earth.getZoom()) / 10) * 2;
+                    }
+                    else if (earth.getZoom() < 7) {
+                        escalaBig = (Math.abs(0.65 - earth.getZoom()) / 10);
+                    } else if (earth.getZoom() < 10 && earth.getZoom() > 7) {
+                        escalaBig = (Math.abs(0.65 - earth.getZoom()) / 15) / 10;
+                    } else {
+                        escalaBig = Math.abs((0.625 - earth.getZoom() / 25)) / 100;
+                    }
+                    //console.log(Math.abs(hand.roll()));
+
+                    var c = earth.getPosition();
+                    if (hand.screenPosition()[0] < 300) {
+                        c[1] = c[1] - escalaBig;
+                    }
+                    else if (hand.screenPosition()[0] > 500) {
+                        c[1] = c[1] + escalaBig;
+                    }
+                    if (hand.screenPosition()[1] < 300) {
+                        c[0] = c[0] + escalaBig;
+                    }
+                    else if (hand.screenPosition()[1] > 500) {
+                        c[0] = c[0] - escalaBig;
+                    }
+                    earth.setCenter([c[0], c[1]]);
+                    if (hand.screenPosition()[2] < -150) {
+                        earth.setZoom(earth.getZoom() + 0.05);
+                    }
+                    else if (hand.screenPosition()[2] > 200) {
+                        earth.setZoom(earth.getZoom() - 0.05);
+                    }
+                }
+            });
+        }).use('screenPosition', {scale: 0.25}).use('boneHand', {
+            targetEl: document.body,
+            arm: false
+        });
+
 
     }
 })();

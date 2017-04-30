@@ -23,13 +23,15 @@ html, body{padding: 0; margin: 0;}
   body {
     margin: 0;
   }
+    button{
+        z-index: 10000;
+    }
 </style>
 <div>
     <div id="earth_div" class="leap-interactive"></div>
     <div id="layer-panel">
 
       <div class="btn"
-        onclick="this.open()"
         isteven-multi-select
         input-model="layers"
         output-model="outputLayers"
