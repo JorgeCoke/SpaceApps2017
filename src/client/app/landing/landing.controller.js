@@ -127,71 +127,79 @@
         var NightIsOn = false;
         var firstTime = true;
         var night;
+        var detectadoCambioFecha = false;
 
         Leap.loop({background: true},function(frame) {
                   frame.hands.forEach(function(hand, index) {
 
-                    //console.log(hand);
-                    if (Math.abs(hand.roll()) > 2.6 && !NightIsOn){
-                      NightIsOn = true;
-                      if (firstTime){
-                        night = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + 'VIIRS_CityLights_2012' + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
-                            bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
-                            minZoom: 1,
-                            maxZoom: 5,
-                            level: 8,
-                            format: 'jpg',
-                            time: parseDate(vm.date),
-                            tilematrixset: 'GoogleMapsCompatible_Level',
-                            opacity: 0.6
-                        });
-                        night.addTo(earth);
-                        firstTime = false;
-                      }
-                      //layersHash[i].layer = aux;
-                      if (night)
-                      night.setOpacity(0.6);
+                    if (hand.type == "left" && !detectadoCambioFecha && hand.grabStrength == 1){
+                      detectadoCambioFecha = true;
+                      alert("Fecha cambiada"); detectadoCambioFecha = false;
+                      setTimeout(function(){ alert("Fecha cambiada"); detectadoCambioFecha = false;}, 3000);
                     }
-                    else if (NightIsOn && Math.abs(hand.roll()) < 2.6) {
-                        NightIsOn = false;
+                    else {
+                      //console.log(hand);
+                      if (Math.abs(hand.roll()) > 2.6 && !NightIsOn){
+                        NightIsOn = true;
+                        if (firstTime){
+                          night = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + 'VIIRS_CityLights_2012' + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
+                              bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
+                              minZoom: 1,
+                              maxZoom: 5,
+                              level: 8,
+                              format: 'jpg',
+                              time: parseDate(vm.date),
+                              tilematrixset: 'GoogleMapsCompatible_Level',
+                              opacity: 0.6
+                          });
+                          night.addTo(earth);
+                          firstTime = false;
+                        }
+                        //layersHash[i].layer = aux;
                         if (night)
-                        night.setOpacity(0);
-                    }
+                        night.setOpacity(0.6);
+                      }
+                      else if (NightIsOn && Math.abs(hand.roll()) < 2.6) {
+                          NightIsOn = false;
+                          if (night)
+                          night.setOpacity(0);
+                      }
 
-                    //console.log(hand.screenPosition());
-                    console.log(earth.getZoom());
-                    var escalaBig;
-                    if (earth.getZoom() < 5){
-                      escalaBig = (Math.abs(0.65-earth.getZoom())/10)*2;
-                    }
-                    else if (earth.getZoom() < 7){
-                      escalaBig = (Math.abs(0.65-earth.getZoom())/10);
-                    } else if (earth.getZoom() < 10 && earth.getZoom() > 7) {
-                      escalaBig = (Math.abs(0.65-earth.getZoom())/15)/10;
-                    } else{
-                      escalaBig = Math.abs((0.625-earth.getZoom()/25))/100;
-                    }
-                    //console.log(Math.abs(hand.roll()));
+                      //console.log(hand.screenPosition());
+                      console.log(earth.getZoom());
+                      var escalaBig;
+                      if (earth.getZoom() < 5){
+                        escalaBig = (Math.abs(0.65-earth.getZoom())/10)*2;
+                      }
+                      else if (earth.getZoom() < 7){
+                        escalaBig = (Math.abs(0.65-earth.getZoom())/10);
+                      } else if (earth.getZoom() < 10 && earth.getZoom() > 7) {
+                        escalaBig = (Math.abs(0.65-earth.getZoom())/15)/10;
+                      } else{
+                        escalaBig = Math.abs((0.625-earth.getZoom()/25))/100;
+                      }
+                      //console.log(Math.abs(hand.roll()));
 
-                    var c = earth.getPosition();
-                    if (hand.screenPosition()[0] < 300){
-                      c[1] = c[1] - escalaBig;
-                    }
-                    else if (hand.screenPosition()[0] > 500){
-                      c[1] = c[1] + escalaBig;
-                    }
-                    if (hand.screenPosition()[1] < 300){
-                      c[0] = c[0] + escalaBig;
-                    }
-                    else if (hand.screenPosition()[1] > 500){
-                      c[0] = c[0] - escalaBig;
-                    }
-                    earth.setCenter([c[0], c[1]]);
-                    if (hand.screenPosition()[2] < -150){
-                      earth.setZoom(earth.getZoom()+0.05);
-                    }
-                    else if (hand.screenPosition()[2] > 200){
-                      earth.setZoom(earth.getZoom()-0.05);
+                      var c = earth.getPosition();
+                      if (hand.screenPosition()[0] < 300){
+                        c[1] = c[1] - escalaBig;
+                      }
+                      else if (hand.screenPosition()[0] > 500){
+                        c[1] = c[1] + escalaBig;
+                      }
+                      if (hand.screenPosition()[1] < 300){
+                        c[0] = c[0] + escalaBig;
+                      }
+                      else if (hand.screenPosition()[1] > 500){
+                        c[0] = c[0] - escalaBig;
+                      }
+                      earth.setCenter([c[0], c[1]]);
+                      if (hand.screenPosition()[2] < -150){
+                        earth.setZoom(earth.getZoom()+0.05);
+                      }
+                      else if (hand.screenPosition()[2] > 200){
+                        earth.setZoom(earth.getZoom()-0.05);
+                      }
                     }
                   });
                 }).use('screenPosition', {scale: 0.25}).use('boneHand', {
