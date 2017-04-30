@@ -9,7 +9,6 @@
             'ngAnimate',
             'angular-loading-bar',
             'app.landing',
-            'app.landingNormal',
             'app.layout'
         ])
         .config(function ($stateProvider, $urlRouterProvider, $logProvider, $locationProvider) {
@@ -28,11 +27,6 @@
                     url: '/',
                     templateUrl: 'app/landing/landing.html',
                     controller: 'LandingController as vm'
-                })
-                .state('static', {
-                    url: '/static',
-                    templateUrl: 'app/landingNormal/landing.html',
-                    controller: 'StaticController as vm'
                 });
         });
 })();

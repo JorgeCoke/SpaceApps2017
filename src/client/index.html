@@ -82,7 +82,6 @@ z-index: 10000;
 <!-- endbower -->
 <!-- endbuild -->
 
-<script src="LeafletGoogle.js"></script>
 <script src="http://www.webglearth.com/v2/api.js"></script>
 <script src="GIBSLayer.js"></script>
 <script src="GIBSMetadata.js"></script>
@@ -93,17 +92,16 @@ z-index: 10000;
 <script src="//js.leapmotion.com/leap.rigged-hand-0.1.7.min.js"></script>
 <script src="//js.leapmotion.com/leap-widgets-0.1.0.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=" async defer></script>
+<script src="//wilkesalex.github.io/leapstrap/dist/js/leapstrap.js"></script>
 
 <!-- Importacion automatica de modulos individuales y sus ficheros -->
 <!-- build:js js/app.js -->
 <!-- inject:js -->
 <script src="/src/client/app/app.module.js"></script>
 <script src="/src/client/app/landing/landing.module.js"></script>
-<script src="/src/client/app/landingNormal/landing.module.js"></script>
 <script src="/src/client/app/layout/layout.module.js"></script>
 <script src="/src/client/app/layout/navbar/navbar.module.js"></script>
 <script src="/src/client/app/landing/landing.controller.js"></script>
-<script src="/src/client/app/landingNormal/landing.controller.js"></script>
 <script src="/src/client/app/layout/alert.service.js"></script>
 <script src="/src/client/app/layout/layout.controller.js"></script>
 <script src="/src/client/app/layout/navbar/navbar.directive.js"></script>
@@ -112,7 +110,6 @@ z-index: 10000;
 <!-- inject:templates:js -->
 <!-- endinject -->
 
-<script ng-if="$state.equals === 'landing'" src="//wilkesalex.github.io/leapstrap/dist/js/leapstrap.js"></script>
 </body>
 
 </html>
