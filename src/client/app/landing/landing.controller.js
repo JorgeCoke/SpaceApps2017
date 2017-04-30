@@ -57,7 +57,6 @@
             // {layer: toner, name: 'toner'},
             {layer: openStreetMap, name: 'Open Street Map'},
 
-            {layer: null, name: 'VIIRS_CityLights_2012'},
             {layer: null, name: 'MODIS_Terra_Land_Surface_Temp_Day'},
             {layer: null, name: 'MODIS_Terra_Snow_Cover'},
             {layer: null, name: 'MODIS_Aqua_CorrectedReflectance_Bands721'},
@@ -125,8 +124,43 @@
             }
         }
 
+        var NightIsOn = false;
+        var firstTime = true;
+        var night;
+
         Leap.loop({background: true},function(frame) {
                   frame.hands.forEach(function(hand, index) {
+
+                    console.log(hand);
+                    console.log(hand);
+
+
+                    if (Math.abs(hand.roll()) > 2.6 && !NightIsOn){
+                      NightIsOn = true;
+                      if (firstTime){
+                        night = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + 'VIIRS_CityLights_2012' + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
+                            bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
+                            minZoom: 1,
+                            maxZoom: 5,
+                            level: 8,
+                            format: 'jpg',
+                            time: parseDate(vm.date),
+                            tilematrixset: 'GoogleMapsCompatible_Level',
+                            opacity: 0.6
+                        });
+                        night.addTo(earth);
+                        firstTime = false;
+                      }
+                      //layersHash[i].layer = aux;
+                      if (night)
+                      night.setOpacity(0.6);
+                    }
+                    else if (NightIsOn && Math.abs(hand.roll()) < 2.6) {
+                        NightIsOn = false;
+                        if (night)
+                        night.setOpacity(0);
+                    }
+
                     //console.log(hand.screenPosition());
                     //console.log(earth.getZoom());
                     var escalaBig;
@@ -137,7 +171,7 @@
                     } else{
                       escalaBig = Math.abs((0.625-earth.getZoom()/25))/100;
                     }
-                    console.log(earth.getZoom(),escalaBig);
+                    console.log(Math.abs(hand.roll()));
 
                     var c = earth.getPosition();
                     if (hand.screenPosition()[0] < 300){
