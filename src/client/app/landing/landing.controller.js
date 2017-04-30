@@ -10,6 +10,15 @@
     function LandingController($rootScope, $scope, $state) {
         var vm = this;
 
+        LeapManager.init({
+            maxCursors:1,
+            enableMetaGestures: false,
+            enableDefaultMetaGestureActions: false,
+            enableHoverTap: true,
+            enableTouchScrolling: false,
+            enableScrollbarScrolling: false
+        });
+
         var earth = new WE.map('earth_div', {
             sky: true,
             atmosphere: true

@@ -33,19 +33,21 @@ md-datepicker{
 <div>
     <div id="earth_div"></div>
     <div id="layer-panel">
-      <div
-        isteven-multi-select
-        input-model="layers"
-        output-model="outputLayers"
-        button-label="icon name"
-        item-label="icon name maker"
-        tick-property="ticked"
-        on-item-click="vm.checkLayers(data)"
-        on-select-all="vm.selectAllLayers()"
-        on-select-none="vm.resetLayers()"
-        on-reset="vm.resetLayers()" id="dropdown">
-      </div>
+        <div
+                isteven-multi-select
+                input-model="layers"
+                output-model="outputLayers"
+                button-label="icon name"
+                item-label="icon name maker"
+                tick-property="ticked"
+                on-item-click="vm.checkLayers(data)"
+                on-select-all="vm.selectAllLayers()"
+                on-select-none="vm.resetLayers()"
+                on-reset="vm.resetLayers()" id="dropdown">
+        </div>
     </div>
+    <canvas id="canvas"></canvas>
+    <div id="debug"></div>
     <div id="date-panel">
       <md-datepicker name="selectDate" ng-model="vm.date"
                      md-placeholder="Select a date to visualize data"
@@ -53,3 +55,6 @@ md-datepicker{
       </md-datepicker>
     </div>
 </div>
+
+<script src="leap-controller.js"></script>
+<script src="leap-src.js"></script>

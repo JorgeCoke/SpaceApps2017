@@ -10,7 +10,9 @@
     function StaticController($rootScope, $scope, $state) {
         var vm = this;
 
-        var earth = L.map('earth_div').setView([60, 50], 3);
+        var earth = L.map('earth_div', {
+            keyboard: false
+        }).setView([60, 50], 3);
         earth.zoomControl.setPosition('bottomleft');
 
         // var openStreetMap = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -20,6 +22,9 @@
         var roads = L.gridLayer.googleMutant({
             type: 'hybrid' // valid values are 'roadmap', 'satellite', 'terrain' and 'hybrid'
         }).addTo(earth);
+
+        var lc = new LeapController(earth,  "canvas", "debug");
+        lc.init();
 
         $scope.layers = [
             // {name: 'natural', ticked: false, opacity: 0.8},
