@@ -116,14 +116,45 @@
             }
         }
 
-        Leap.loop(function(frame) {
-          frame.hands.forEach(function(hand, index) {
-            if (hand.screenPosition()[0] < 300){
-              var c = earth.getPosition();
-              earth.setCenter([c[0], c[1] + 0.4]);
-            }
-          });
-        }).use('screenPosition', {scale: 0.25});
+        Leap.loop({background: true},function(frame) {
+                  frame.hands.forEach(function(hand, index) {
+                    //console.log(hand.screenPosition());
+                    //console.log(earth.getZoom());
+                    var escalaBig;
+                    if (earth.getZoom() < 7){
+                      escalaBig = Math.abs(0.65-earth.getZoom())/10;
+                    } else if (earth.getZoom() < 10 && earth.getZoom() > 7) {
+                      escalaBig = Math.abs(0.65-earth.getZoom())/15;
+                    } else{
+                      escalaBig = Math.abs((0.625-earth.getZoom()/25))/100;
+                    }
+                    console.log(earth.getZoom(),escalaBig);
+
+                    var c = earth.getPosition();
+                    if (hand.screenPosition()[0] < 300){
+                      c[1] = c[1] - escalaBig;
+                    }
+                    else if (hand.screenPosition()[0] > 500){
+                      c[1] = c[1] + escalaBig;
+                    }
+                    if (hand.screenPosition()[1] < 300){
+                      c[0] = c[0] + escalaBig;
+                    }
+                    else if (hand.screenPosition()[1] > 500){
+                      c[0] = c[0] - escalaBig;
+                    }
+                    earth.setCenter([c[0], c[1]]);
+                    if (hand.screenPosition()[2] < -150){
+                      earth.setZoom(earth.getZoom()+0.05);
+                    }
+                    else if (hand.screenPosition()[2] > 200){
+                      earth.setZoom(earth.getZoom()-0.05);
+                    }
+                  });
+                }).use('screenPosition', {scale: 0.25}).use('boneHand', {
+              targetEl: document.body,
+              arm: false
+                });
 
     }
 })();

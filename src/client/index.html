@@ -36,9 +36,19 @@
     <!-- inject:css -->
     <!-- endinject -->
     <!-- endbuild -->
+    <style media="screen">
+    .leap-boneHand{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: 10000;
+}
+    </style>
 </head>
 
-<body class="leap-interactive" leap-disable-tap="true" leap-disable-hover="true">
+<body>
 <div>
     <!-- Inyeccion del layout base de la aplicacion con navbar y contenido -->
     <div ng-include="'app/layout/layout.html'"></div>
@@ -66,7 +76,6 @@
 <script src="/bower_components/angular-aria/angular-aria.js"></script>
 <script src="/bower_components/angular-messages/angular-messages.js"></script>
 <script src="/bower_components/angular-material/angular-material.js"></script>
-<script src="/bower_components/leapjs/leap-0.6.4.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -74,8 +83,13 @@
 <script src="http://www.webglearth.com/v2/api.js"></script>
 <script src="GIBSLayer.js"></script>
 <script src="GIBSMetadata.js"></script>
-<script src="//js.leapmotion.com/leap-0.6.3.js"></script>
-<script src="//js.leapmotion.com/leap-plugins-0.1.8.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
+<script src="//js.leapmotion.com/leap-0.6.4.js"></script>
+<script src="//js.leapmotion.com/leap-plugins-0.1.10.js"></script>
+<script src="//js.leapmotion.com/leap.rigged-hand-0.1.7.min.js"></script>
+<script src="//js.leapmotion.com/leap-widgets-0.1.0.min.js"></script>
+
 <script src="//wilkesalex.github.io/leapstrap/dist/js/leapstrap.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=" async defer></script>
 
@@ -97,7 +111,9 @@
 <!-- inject:templates:js -->
 <!-- endinject -->
 
-<script>LeapManager.init({interactiveSelector:"a",maxCursors:1});</script>
+<script>LeapManager.init({interactiveSelector:"a",maxCursors:1
+
+});</script>
 </body>
 
 </html>
