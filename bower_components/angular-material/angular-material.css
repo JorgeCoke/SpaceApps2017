@@ -1585,12 +1585,15 @@ md-calendar {
 md-datepicker {
   white-space: nowrap;
   overflow: hidden;
-  vertical-align: middle; }
+  vertical-align: middle;
+background: #FFFFFF;background-color:#FFFFFF; color: #FFFFFF;}
 
 .md-inline-form md-datepicker {
-  margin-top: 12px; }
+  margin-top: 12px;
+background: #FFFFFF;background-color:#FFFFFF; color: #FFFFFF;}
 
 .md-datepicker-button {
+  background: #FFFFFF;background-color:#FFFFFF; color: #FFFFFF;
   display: inline-block;
   box-sizing: border-box;
   background: none;
@@ -1658,12 +1661,14 @@ md-datepicker {
     margin-left: -18px; }
 
 .md-datepicker-input-container {
+  background: #FFFFFF;background-color:#FFFFFF; color: #FFFFFF;
   position: relative;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   display: inline-block;
   width: auto; }
   .md-icon-button + .md-datepicker-input-container {
+    background: #FFFFFF;background-color:#FFFFFF; color: #FFFFFF;
     margin-left: 12px; }
     [dir=rtl] .md-icon-button + .md-datepicker-input-container {
       margin-left: auto;
@@ -1704,13 +1709,16 @@ md-datepicker {
   cursor: text; }
 
 .md-datepicker-calendar {
+  background: #FFFFFF;background-color:#FFFFFF; color: #FFFFFF;
   opacity: 0;
   -webkit-transition: opacity 0.2s cubic-bezier(0.5, 0, 0.25, 1);
   transition: opacity 0.2s cubic-bezier(0.5, 0, 0.25, 1); }
   .md-pane-open .md-datepicker-calendar {
-    opacity: 1; }
+    opacity: 1;
+  background: #FFFFFF;background-color:#FFFFFF; color: #FFFFFF;}
   .md-datepicker-calendar md-calendar:focus {
-    outline: none; }
+    outline: none;
+  background: #FFFFFF;background-color:#FFFFFF; color: #FFFFFF;}
 
 .md-datepicker-expand-triangle {
   position: absolute;
