@@ -122,9 +122,9 @@
                     //console.log(earth.getZoom());
                     var escalaBig;
                     if (earth.getZoom() < 7){
-                      escalaBig = Math.abs(0.65-earth.getZoom())/10;
+                      escalaBig = (Math.abs(0.65-earth.getZoom())/10)*2;
                     } else if (earth.getZoom() < 10 && earth.getZoom() > 7) {
-                      escalaBig = Math.abs(0.65-earth.getZoom())/15;
+                      escalaBig = (Math.abs(0.65-earth.getZoom())/15)/10;
                     } else{
                       escalaBig = Math.abs((0.625-earth.getZoom()/25))/100;
                     }

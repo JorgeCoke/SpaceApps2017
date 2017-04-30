@@ -1,10 +1,12 @@
-<!DOCTYPE html>
 <html ng-app="app">
 
 <head>
     <style>
         .ng-hide {
             display: none !important;
+        }
+        canvas.leap-boneHand{
+          pointer-events: none;
         }
     </style>
     <title ng-bind="title">
@@ -76,6 +78,7 @@ z-index: 10000;
 <script src="/bower_components/angular-aria/angular-aria.js"></script>
 <script src="/bower_components/angular-messages/angular-messages.js"></script>
 <script src="/bower_components/angular-material/angular-material.js"></script>
+<script src="/bower_components/leapjs/leap-0.6.4.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
@@ -111,9 +114,16 @@ z-index: 10000;
 <!-- inject:templates:js -->
 <!-- endinject -->
 
-<script>LeapManager.init({interactiveSelector:"a",maxCursors:1
-
-});</script>
+<script>
+LeapManager.init({
+  maxCursors:1,
+  enableMetaGestures: false,
+  enableDefaultMetaGestureActions: false,
+  enableHoverTap: true,
+  enableTouchScrolling: false,
+  enableScrollbarScrolling: false
+});
+</script>
 </body>
 
 </html>
