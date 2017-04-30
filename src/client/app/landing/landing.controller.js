@@ -111,7 +111,11 @@
             {name: 'VIIRS_SNPP_CorrectedReflectance_BandsM3-I3-M11', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
             {name: 'VIIRS_SNPP_CorrectedReflectance_TrueColor', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
             {name: 'VIIRS_SNPP_CorrectedReflectance_BandsM11-I2-I1', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
-            {name: 'MODIS_Aqua_CorrectedReflectance_Bands721', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9}
+            {name: 'MODIS_Aqua_CorrectedReflectance_Bands721', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 9},
+            {name: 'Coastlines', ticked: false, opacity:0.8, format: 'png', maxZoom: 9},
+            {name: 'Reference_Features', ticked: false, opacity:0.8, format: 'png', maxZoom: 9},
+            {name: 'BlueMarble_ShadedRelief', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 8},
+            {name: 'BlueMarble_NextGeneration', ticked: false, opacity:0.8, format: 'jpg', maxZoom: 8}
 
         ];
         $scope.outputLayers = [];
@@ -132,7 +136,11 @@
             {layer: null, name: 'VIIRS_SNPP_CorrectedReflectance_BandsM3-I3-M11'},
             {layer: null, name: 'VIIRS_SNPP_CorrectedReflectance_TrueColor'},
             {layer: null, name: 'VIIRS_SNPP_CorrectedReflectance_BandsM11-I2-I1'},
-            {layer: null, name: 'MODIS_Aqua_CorrectedReflectance_Bands721'}
+            {layer: null, name: 'MODIS_Aqua_CorrectedReflectance_Bands721'},
+            {layer: null, name: 'Coastlines'},
+            {layer: null, name: 'Reference_Features'},
+            {layer: null, name: 'BlueMarble_ShadedRelief'},
+            {layer: null, name: 'BlueMarble_NextGeneration'}
         ];
 
         vm.checkLayers = checkLayers;
@@ -141,6 +149,12 @@
 
         vm.date = new Date();
         vm.capas = [];
+
+        function parseDate(date){
+            return date.getFullYear() + '-' +
+                ('0' + (date.getMonth()+1)).slice(-2) + '-' +
+                ('0' + date.getDate()).slice(-2);
+        }
 
         function selectAllLayers() {
         }
@@ -153,19 +167,20 @@
         }
 
         function checkLayers(data) {
-            console.log(data);
+            //console.log(data);
             for (var i = 0; i < layersHash.length; i++) {
                 if (layersHash[i].name === data.name && data.ticked) {
                     // console.log("añado capa", layersHash[i]);
                     // console.log(data);
                     // console.log("añado capa");
                     // console.log(layersHash[i].layer);
-                    var aux = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + data.name + '/default/{time}/{tilematrixset}{maxZoom}/{z}/{y}/{x}.{format}', {
+                    var aux = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + data.name + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
                         bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
                         minZoom: 1,
-                        maxZoom: data.maxZoom,
+                        maxZoom: 5,
+                        level: data.maxZoom,
                         format: data.format,
-                        time: '',
+                        time: parseDate(vm.date),
                         tilematrixset: 'GoogleMapsCompatible_Level',
                         opacity: data.opacity
                     });
