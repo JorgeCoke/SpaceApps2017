@@ -131,10 +131,7 @@
         Leap.loop({background: true},function(frame) {
                   frame.hands.forEach(function(hand, index) {
 
-                    console.log(hand);
-                    console.log(hand);
-
-
+                    //console.log(hand);
                     if (Math.abs(hand.roll()) > 2.6 && !NightIsOn){
                       NightIsOn = true;
                       if (firstTime){
@@ -162,16 +159,19 @@
                     }
 
                     //console.log(hand.screenPosition());
-                    //console.log(earth.getZoom());
+                    console.log(earth.getZoom());
                     var escalaBig;
-                    if (earth.getZoom() < 7){
+                    if (earth.getZoom() < 5){
                       escalaBig = (Math.abs(0.65-earth.getZoom())/10)*2;
+                    }
+                    else if (earth.getZoom() < 7){
+                      escalaBig = (Math.abs(0.65-earth.getZoom())/10);
                     } else if (earth.getZoom() < 10 && earth.getZoom() > 7) {
                       escalaBig = (Math.abs(0.65-earth.getZoom())/15)/10;
                     } else{
                       escalaBig = Math.abs((0.625-earth.getZoom()/25))/100;
                     }
-                    console.log(Math.abs(hand.roll()));
+                    //console.log(Math.abs(hand.roll()));
 
                     var c = earth.getPosition();
                     if (hand.screenPosition()[0] < 300){
