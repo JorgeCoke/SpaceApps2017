@@ -45,7 +45,7 @@ html, body{padding: 0; margin: 0;}
       </div>
     </div>
     <div id="date-panel">
-      <md-datepicker name="fechaCaducidad" ng-model="vm.date"
+      <md-datepicker name="fechaCaducidad" ng-model="vm.date" ng-change="vm.changeDate()"
                      md-placeholder="Select a date to visualize data"
                      required md-open-on-focus style="background: #FFFFFF;background-color:#FFFFFF">
       </md-datepicker>

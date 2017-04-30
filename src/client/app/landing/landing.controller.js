@@ -102,10 +102,17 @@
         vm.selectAllLayers = selectAllLayers;
         vm.resetLayers = resetLayers;
         vm.backDate = backDate;
+        vm.changeDate = changeDate;
 
         var aux;
         vm.date = new Date();
         vm.capas = [];
+
+        function changeDate(){
+            $timeout(function () {
+                backDate();
+            }, 1000);
+        }
 
         function parseDate(date) {
             return date.getFullYear() + '-' +
@@ -213,28 +220,22 @@
                     //console.log(hand);
                     if (Math.abs(hand.roll()) > 2.6 && !NightIsOn) {
                         NightIsOn = true;
-                        if (firstTime) {
-                            night = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + 'VIIRS_CityLights_2012' + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
-                                bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
-                                minZoom: 1,
-                                maxZoom: 5,
-                                level: 8,
-                                format: 'jpg',
-                                time: parseDate(vm.date),
-                                tilematrixset: 'GoogleMapsCompatible_Level',
-                                opacity: 0.6
-                            });
-                            night.addTo(earth);
-                            firstTime = false;
-                        }
-                        //layersHash[i].layer = aux;
-                        if (night)
-                            night.setOpacity(0.6);
+                        night = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + 'VIIRS_CityLights_2012' + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
+                            bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
+                            minZoom: 1,
+                            maxZoom: 5,
+                            level: 8,
+                            format: 'jpg',
+                            time: parseDate(vm.date),
+                            tilematrixset: 'GoogleMapsCompatible_Level',
+                            opacity: 0.6
+                        });
+                        night.addTo(earth);
                     }
                     else if (NightIsOn && Math.abs(hand.roll()) < 2.6) {
                         NightIsOn = false;
                         if (night)
-                            night.setOpacity(0);
+                            night.removeFrom(earth);
                     }
 
                     //console.log(hand.screenPosition());
