@@ -18,6 +18,8 @@
 
     <!-- CSS del sistema obtenidos de bower -->
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="//wilkesalex.github.io/leapstrap/dist/css/leapstrap.css" />
+
     <!-- build:css styles/lib.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -42,7 +44,6 @@
     <div ng-include="'app/layout/layout.html'"></div>
 </div>
 <br>
-
 
 <!-- build:js js/lib.js -->
 <!-- bower:js -->
@@ -69,6 +70,15 @@
 <!-- endbower -->
 <!-- endbuild -->
 
+<script src="LeafletGoogle.js"></script>
+<script src="http://www.webglearth.com/v2/api.js"></script>
+<script src="GIBSLayer.js"></script>
+<script src="GIBSMetadata.js"></script>
+<script src="//js.leapmotion.com/leap-0.6.3.js"></script>
+<script src="//js.leapmotion.com/leap-plugins-0.1.8.js"></script>
+<script src="//wilkesalex.github.io/leapstrap/dist/js/leapstrap.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=" async defer></script>
+
 <!-- Importacion automatica de modulos individuales y sus ficheros -->
 <!-- build:js js/app.js -->
 <!-- inject:js -->
@@ -84,15 +94,10 @@
 <script src="/src/client/app/layout/navbar/navbar.directive.js"></script>
 <!-- endinject -->
 
-<script src="http://www.webglearth.com/v2/api.js"></script>
-<script src="GIBSLayer.js"></script>
-<script src="GIBSMetadata.js"></script>
-
-<script src="//js.leapmotion.com/leap-0.6.3.js"></script>
-<script src="//js.leapmotion.com/leap-plugins-0.1.8.js"></script>
-
 <!-- inject:templates:js -->
 <!-- endinject -->
+
+<script>LeapManager.init({interactiveSelector:"a",maxCursors:1});</script>
 </body>
 
 </html>
