@@ -104,8 +104,21 @@
 
         function changeDate(){
             $timeout(function () {
-                backDate();
+                newDate();
             }, 1000);
+        }
+
+        function newDate() {
+            for (var j = 0; j < $scope.layers.length; j++) {
+                var layer = $scope.layers[j];
+
+                if (layer.ticked) {
+                    var activeLayer = layersHash[j].layer;
+                    activeLayer.removeFrom(earth);
+                    checkLayers($scope.layers[j]);
+                }
+            }
+
         }
 
         function parseDate(date) {
@@ -119,8 +132,6 @@
             newDate.setMonth(vm.date.getMonth() - 1);
             vm.date = newDate;
 
-            //vm.date.setMonth(vm.date.getMonth() + 1);
-
             console.log(vm.date);
             for (var j = 0; j < $scope.layers.length; j++) {
                 var layer = $scope.layers[j];
@@ -128,7 +139,6 @@
                 if (layer.ticked) {
                     var activeLayer = layersHash[j].layer;
                     activeLayer.removeFrom(earth);
-                    console.log('Cambiando capa');
                     checkLayers($scope.layers[j]);
                 }
             }
