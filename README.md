@@ -16,3 +16,8 @@ All of this is being used with GIBS data layers information, WebGL, Leaflet and 
 ## Useful links
 
 1. [Our project!](https://2017.spaceappschallenge.org/challenges/ideate-and-create/1d-2d-3d-go/teams/3dnasa/project)
+
+2. [Slides](https://docs.google.com/presentation/d/11YCQq7uecdrtkbqu9Mg2CoTmheZrNLxtCVdXRJ943AY/pub?start=false&loop=false&delayms=60000&slide=id.g35f391192_00)
+
+3. [Video](https://www.youtube.com/watch?v=cuuTApWy0jk)
+
