@@ -1,9 +1,9 @@
 {
-  "name": "spaceapps2017",
+  "name": "3dnasa",
   "version": "0.0.1",
-  "description": "Space Apps 2017",
+  "description": "2017 SpaceApps project challenge",
   "authors": [],
-  "license": "uNEDFI",
+  "license": "UNDEFINED",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -27,7 +27,6 @@
     "font-awesome": "^4.5.0",
     "jquery": "~2.1.3",
     "angular-animate": "^1.6.3",
-    "angular-loading-bar": "^0.9.0",
     "moment": "~2.12.0",
     "toastr": "~2.1.2",
     "proj4": "^2.4.3",

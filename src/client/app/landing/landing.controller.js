@@ -5,9 +5,9 @@
         .module('app.landing')
         .controller('LandingController', LandingController);
 
-    LandingController.inject = ['$rootScope', '$scope', '$state', '$timeout'];
+    LandingController.inject = ['$scope', '$state', '$timeout'];
 
-    function LandingController($rootScope, $scope, $state, $timeout) {
+    function LandingController($scope, $state, $timeout) {
         var vm = this;
         vm.title='3D Nasa';
 
@@ -130,24 +130,10 @@
                     activeLayer.removeFrom(earth);
                     console.log('Cambiando capa');
                     checkLayers($scope.layers[j]);
-                    // console.log(activeLayer);
-                    // console.log(activeLayer.C._imageryProvider._url);
-                    // var data = activeLayer.C._imageryProvider._url.split('/');
-                    // console.log(data[6]);
-                    // data[6]= parseDate(vm.date);
-                    // var newDataTogether = data.join();
-                    // activeLayer.C._imageryProvider._url = newDataTogether.replace(/,/g,'/');
                 }
             }
 
         }
-
-
-        // $timeout(function () {
-        //     $scope.layers[1] = {name: 'MODIS_Terra_Snow_Cover', ticked: true, opacity: 0.4, format: 'png', maxZoom: 8};
-        //     checkLayers($scope.layers[1]);
-        //
-        // }, 5000);
 
         function selectAllLayers() {
 
@@ -158,13 +144,8 @@
         }
 
         function checkLayers(data) {
-            //console.log(data);
             for (var i = 0; i < layersHash.length; i++) {
                 if (layersHash[i].name === data.name && data.ticked) {
-                    // console.log("añado capa", layersHash[i]);
-                    // console.log(data);
-                    // console.log("añado capa");
-                    // console.log(layersHash[i].layer);
                     aux = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + data.name + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
                         bounds: [[-85.0511287776, -179.999999975], [85.0511287776, 179.999999975]],
                         minZoom: 1,
@@ -175,22 +156,17 @@
                         tilematrixset: 'GoogleMapsCompatible_Level',
                         opacity: data.opacity
                     });
-                    //console.log(aux);
                     layersHash[i].layer = aux;
                     aux.addTo(earth);
-                    // layersHash[i].layer.addTo(earth);
-                    // layersHash[i].layer.setOpacity(data.opacity);
 
                 }
                 else if (layersHash[i].name === data.name && !data.ticked) {
-                    // console.log("elimino capa");
                     layersHash[i].layer.setOpacity(0);
                 }
             }
         }
 
         var NightIsOn = false;
-        var firstTime = true;
         var night;
         var detectadoCambioFecha = false;
 
@@ -201,7 +177,6 @@
                     if (hand.type == "left" && !detectadoCambioFecha && hand.grabStrength == 1) {
                         detectadoCambioFecha = true;
 
-                        //console.log('Iendo pa traaaaaaaaaaaaa');
                         $timeout(function () {
                             detectadoCambioFecha = false;
                             backDate();
@@ -210,7 +185,6 @@
                 }
                 else
                 {
-                    //console.log(hand);
                     if (Math.abs(hand.roll()) > 2.6 && !NightIsOn) {
                         NightIsOn = true;
                         night = WE.tileLayer('http://map1.vis.earthdata.nasa.gov/wmts-webmerc/' + 'VIIRS_CityLights_2012' + '/default/{time}/{tilematrixset}{level}/{z}/{y}/{x}.{format}', {
@@ -231,7 +205,6 @@
                             night.removeFrom(earth);
                     }
 
-                    //console.log(hand.screenPosition());
                     console.log(earth.getZoom());
                     var escalaBig;
                     if (earth.getZoom() < 5) {
@@ -244,7 +217,6 @@
                     } else {
                         escalaBig = Math.abs((0.625 - earth.getZoom() / 25)) / 100;
                     }
-                    //console.log(Math.abs(hand.roll()));
 
                     var c = earth.getPosition();
                     if (hand.screenPosition()[0] < 300) {

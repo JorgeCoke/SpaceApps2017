@@ -5,8 +5,9 @@
         .ng-hide {
             display: none !important;
         }
-        canvas.leap-boneHand{
-          pointer-events: none;
+
+        canvas.leap-boneHand {
+            pointer-events: none;
         }
     </style>
     <title ng-bind="title">
@@ -18,35 +19,33 @@
           content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
     <base href="/">
 
-    <!-- CSS del sistema obtenidos de bower -->
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="//wilkesalex.github.io/leapstrap/dist/css/leapstrap.css" />
+    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="//wilkesalex.github.io/leapstrap/dist/css/leapstrap.css"/>
+    <link rel="stylesheet" href="sources/isteven-angular-multiselect/isteven-multi-select.css"/>
+    <link rel="stylesheet" href="sources/angular-material/angular-material.css"/>
 
     <!-- build:css styles/lib.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css" />
-    <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
-    <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/bower_components/toastr/toastr.css"/>
+    <link rel="stylesheet" href="/bower_components/leaflet/dist/leaflet.css"/>
     <!-- endbower -->
     <!-- endbuild -->
-
-    <link rel="stylesheet" href="/bower_components/isteven-angular-multiselect/isteven-multi-select.css" />
-    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css" />
 
     <!-- build:css styles/app.css -->
     <!-- inject:css -->
     <!-- endinject -->
     <!-- endbuild -->
     <style media="screen">
-    .leap-boneHand{
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-z-index: 10000;
-}
+        .leap-boneHand {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+        }
     </style>
 </head>
 
@@ -77,25 +76,20 @@ z-index: 10000;
 <!-- endbower -->
 <!-- endbuild -->
 
-<script src="/bower_components/isteven-angular-multiselect/isteven-multi-select.js"></script>
-<script src="/bower_components/angular-aria/angular-aria.js"></script>
-<script src="/bower_components/angular-messages/angular-messages.js"></script>
-<script src="/bower_components/angular-material/angular-material.js"></script>
+<script src="sources/isteven-angular-multiselect/isteven-multi-select.js"></script>
+<script src="sources/angular-aria/angular-aria.js"></script>
+<script src="sources/angular-messages/angular-messages.js"></script>
+<script src="sources/angular-material/angular-material.js"></script>
 
 <script src="http://www.webglearth.com/v2/api.js"></script>
-<script src="GIBSLayer.js"></script>
-<script src="GIBSMetadata.js"></script>
-
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
 <script src="//js.leapmotion.com/leap-0.6.4.js"></script>
 <script src="//js.leapmotion.com/leap-plugins-0.1.10.js"></script>
 <script src="//js.leapmotion.com/leap.rigged-hand-0.1.7.min.js"></script>
 <script src="//js.leapmotion.com/leap-widgets-0.1.0.min.js"></script>
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=" async defer></script>-->
 <script src="//wilkesalex.github.io/leapstrap/dist/js/leapstrap.js"></script>
 
-<!-- Importacion automatica de modulos individuales y sus ficheros -->
-<!-- build:js js/app.js -->
+<!-- build:js js/app.js --
 <!-- inject:js -->
 <script src="/src/client/app/app.module.js"></script>
 <script src="/src/client/app/landing/landing.module.js"></script>

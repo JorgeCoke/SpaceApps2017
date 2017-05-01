@@ -21,7 +21,6 @@
                     url: '/404',
                     templateUrl: 'app/templates/404.html'
                 })
-                //Home when no user is logged in
                 .state('landing', {
                     url: '/',
                     templateUrl: 'app/landing/landing.html',
