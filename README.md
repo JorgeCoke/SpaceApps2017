@@ -19,5 +19,5 @@ All of this is being used with GIBS data layers information, WebGL, Leaflet and 
 
 2. [Slides](https://docs.google.com/presentation/d/11YCQq7uecdrtkbqu9Mg2CoTmheZrNLxtCVdXRJ943AY/pub?start=false&loop=false&delayms=60000&slide=id.g35f391192_00)
 
-3. [Video](https://www.youtube.com/watch?v=cuuTApWy0jk)
+3. [Video](https://www.youtube.com/watch?v=d32jUPvA-E4)
 
